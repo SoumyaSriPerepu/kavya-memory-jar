@@ -15,7 +15,6 @@ export default function MemoryJar() {
     [openedIds]
   );
 
-  const fillRatio = remaining.length / memories.length;
   const allOpened = remaining.length === 0;
 
   function pullMemory() {
@@ -42,7 +41,11 @@ export default function MemoryJar() {
         aria-label="Pull a memory from the jar"
         className="cursor-pointer border-none bg-transparent p-0"
       >
-        <Jar fillRatio={allOpened ? 1 : fillRatio} shaking={shaking} />
+        <Jar
+          total={memories.length}
+          remaining={allOpened ? memories.length : remaining.length}
+          shaking={shaking}
+        />
       </button>
 
       <p className="font-sans text-sm text-foreground/70">

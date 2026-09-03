@@ -13,7 +13,7 @@ export default function MemoryCard({ memory, onClose }: MemoryCardProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md rounded-3xl bg-card p-6 shadow-2xl animate-pop-in"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl bg-card p-6 shadow-2xl animate-pop-in"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -25,13 +25,13 @@ export default function MemoryCard({ memory, onClose }: MemoryCardProps) {
         </button>
 
         {memory.image && (
-          <div className="mb-4 overflow-hidden rounded-2xl">
+          <div className="mb-4 overflow-hidden rounded-2xl bg-background">
             <Image
               src={memory.image}
               alt={memory.caption}
-              width={600}
-              height={450}
-              className="h-56 w-full object-cover"
+              width={800}
+              height={800}
+              className="h-auto max-h-[60vh] w-full object-contain"
             />
           </div>
         )}

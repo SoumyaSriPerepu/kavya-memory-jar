@@ -1,74 +1,109 @@
 type JarProps = {
-  fillRatio: number; // 0 (empty) to 1 (full)
+  total: number;
+  remaining: number;
   shaking?: boolean;
 };
 
-export default function Jar({ fillRatio, shaking }: JarProps) {
-  const clamped = Math.max(0, Math.min(1, fillRatio));
-  const fillHeight = 150 * clamped;
-  const fillY = 300 - fillHeight;
+const NOTE_COLORS = ["#f7c9d1", "#bcd7e8", "#fbe2a7", "#c9e4c5", "#d9c9e8"];
+
+const COLS = 3;
+const ROW_HEIGHT = 20;
+const COL_WIDTH = 34;
+const BOTTOM_Y = 288;
+const LEFT_X = 62;
+
+function buildNotes(total: number) {
+  const notes = [];
+  for (let i = 0; i < total; i++) {
+    const row = Math.floor(i / COLS);
+    const col = i % COLS;
+    const jitterX = Math.round(Math.sin(i * 12.9) * 5 * 100) / 100;
+    const jitterY = Math.round(Math.cos(i * 7.3) * 4 * 100) / 100;
+    const rotation = Math.round(Math.sin(i * 5.7) * 22 * 100) / 100;
+    notes.push({
+      x: LEFT_X + col * COL_WIDTH + jitterX,
+      y: BOTTOM_Y - row * ROW_HEIGHT + jitterY,
+      rotation,
+      color: NOTE_COLORS[i % NOTE_COLORS.length],
+    });
+  }
+  return notes;
+}
+
+export default function Jar({ total, remaining, shaking }: JarProps) {
+  const notes = buildNotes(total).slice(0, remaining);
 
   return (
     <div className={shaking ? "animate-[wiggle_0.4s_ease-in-out]" : ""}>
       <svg
         width="220"
-        height="320"
-        viewBox="0 0 220 320"
+        height="330"
+        viewBox="0 0 220 330"
         className="animate-jar-glow"
       >
         <defs>
           <clipPath id="jarBody">
-            <path d="M45 90 Q45 80 55 80 L165 80 Q175 80 175 90 L175 290 Q175 305 160 305 L60 305 Q45 305 45 290 Z" />
+            <path d="M42 96 Q40 84 55 82 L165 82 Q180 84 178 96 L182 280 Q183 300 165 305 L55 305 Q37 300 38 280 Z" />
           </clipPath>
-          <linearGradient id="notesGlow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#ffd98e" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#e08a5b" stopOpacity="0.9" />
-          </linearGradient>
         </defs>
 
         <g clipPath="url(#jarBody)">
-          <rect
-            x="40"
-            y={fillY}
-            width="140"
-            height={fillHeight}
-            fill="url(#notesGlow)"
-            className="transition-all duration-700 ease-out"
-          />
-          <rect x="55" y={fillY + 6} width="14" height="8" rx="2" fill="#fffaf3" opacity="0.9" />
-          <rect x="90" y={fillY + 18} width="14" height="8" rx="2" fill="#fffaf3" opacity="0.85" transform="rotate(-8 97 22)" />
-          <rect x="130" y={fillY + 4} width="14" height="8" rx="2" fill="#fffaf3" opacity="0.9" transform="rotate(6 137 8)" />
-          <rect x="70" y={fillY + 34} width="14" height="8" rx="2" fill="#fffaf3" opacity="0.8" />
-          <rect x="115" y={fillY + 30} width="14" height="8" rx="2" fill="#fffaf3" opacity="0.85" transform="rotate(-4 122 34)" />
+          {notes.map((note, i) => (
+            <g key={i} transform={`translate(${note.x} ${note.y}) rotate(${note.rotation})`}>
+              <rect x={-11} y={-7} width={22} height={14} rx={2} fill={note.color} stroke="#fffaf3" strokeWidth="1" />
+              <path d={`M -11 -7 L 0 -1 L -11 5 Z`} fill="rgba(255,255,255,0.35)" />
+            </g>
+          ))}
         </g>
 
         {/* jar glass outline */}
         <path
-          d="M45 90 Q45 80 55 80 L165 80 Q175 80 175 90 L175 290 Q175 305 160 305 L60 305 Q45 305 45 290 Z"
-          fill="none"
+          d="M42 96 Q40 84 55 82 L165 82 Q180 84 178 96 L182 280 Q183 300 165 305 L55 305 Q37 300 38 280 Z"
+          fill="rgba(255,255,255,0.12)"
           stroke="#e08a5b"
           strokeWidth="4"
-          opacity="0.85"
+          opacity="0.9"
         />
         {/* neck */}
         <path
-          d="M75 80 L75 55 Q75 45 85 45 L135 45 Q145 45 145 55 L145 80"
-          fill="none"
+          d="M76 82 L74 52 Q74 44 84 44 L136 44 Q146 44 146 52 L144 82"
+          fill="rgba(255,255,255,0.1)"
           stroke="#e08a5b"
           strokeWidth="4"
-          opacity="0.85"
+          opacity="0.9"
         />
-        {/* lid */}
-        <rect x="68" y="30" width="84" height="20" rx="6" fill="#e08a5b" />
-        <rect x="68" y="30" width="84" height="8" rx="4" fill="#f3c98b" />
+
+        {/* twine wrap around the neck */}
+        <g stroke="#a97c50" strokeWidth="2.5" strokeLinecap="round" opacity="0.85">
+          <path d="M73 58 L147 52" />
+          <path d="M73 66 L147 60" />
+          <path d="M73 74 L147 68" />
+        </g>
+        {/* twine bow */}
+        <g transform="translate(162 62)">
+          <circle r="4" fill="#a97c50" />
+          <path d="M0 0 Q14 -10 20 2 Q14 6 0 0" fill="none" stroke="#a97c50" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M0 0 Q14 12 22 6 Q14 -2 0 0" fill="none" stroke="#a97c50" strokeWidth="2.5" strokeLinecap="round" />
+        </g>
+
+        {/* cork stopper */}
+        <path
+          d="M70 20 Q70 12 80 12 L140 12 Q150 12 150 20 L150 46 Q150 52 140 52 L80 52 Q70 52 70 46 Z"
+          fill="#d9a066"
+          stroke="#b97f47"
+          strokeWidth="2"
+        />
+        <path d="M74 24 L146 24" stroke="#b97f47" strokeWidth="1.5" opacity="0.6" />
+        <path d="M74 34 L146 34" stroke="#b97f47" strokeWidth="1.5" opacity="0.6" />
+        <path d="M74 44 L146 44" stroke="#b97f47" strokeWidth="1.5" opacity="0.6" />
 
         {/* glass shine */}
         <path
-          d="M60 100 L60 280"
+          d="M52 110 L48 270"
           stroke="#fffaf3"
           strokeWidth="6"
           strokeLinecap="round"
-          opacity="0.35"
+          opacity="0.3"
         />
       </svg>
     </div>

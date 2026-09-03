@@ -13,52 +13,47 @@ export type Memory = {
 export const memories: Memory[] = [
   {
     id: "1",
-    caption: "That time we stayed up till 3am talking about absolutely nothing and everything.",
-    date: "Summer 2019",
+    caption: "Standing under the Lincoln Park sign, arms around each other, way before either of us knew what we'd grow up to be.",
+    image: "/memories/lincoln-park-sign.jpeg",
   },
   {
     id: "2",
-    caption: "Our first road trip together — you made the world's worst playlist and I loved every second of it.",
-    date: "2020",
+    caption: "Dressed up, dramatic, and completely inseparable — you and your kissy face, me just happy to be next to you.",
+    image: "/memories/festive-selfie.jpeg",
   },
   {
     id: "3",
-    caption: "The day you beat me at my own game and never let me forget it.",
+    caption: "Tongues out, masks half on, cranes in the background — the kind of silly you only are with a sister.",
+    image: "/memories/silly-faces-outdoors.jpeg",
   },
   {
     id: "4",
-    caption: "Rainy afternoon, hot chocolate, and the movie we've now watched about twelve times.",
+    caption: "Cap, gown, peace signs. So proud of you that day I could've burst.",
+    image: "/memories/graduation-day.jpeg",
   },
   {
     id: "5",
-    caption: "You showing up out of nowhere on the worst day of my year, just because I needed you.",
+    caption: "All of us wandering around the Oculus, pretending we knew where we were going.",
+    image: "/memories/oculus-with-mom.jpeg",
   },
   {
     id: "6",
-    caption: "That ridiculous inside joke that still makes us laugh for no reason, years later.",
+    caption: "Little sisters on a boat with the skyline behind us, and grown-up us in almost the same pose years later.",
+    image: "/memories/boat-trip-then-and-now.jpeg",
   },
   {
     id: "7",
-    caption: "Baking a cake together that came out completely wrong and eating it anyway.",
+    caption: "Upside-down selfies on the floor for absolutely no reason — pure chaos, pure us.",
+    image: "/memories/upside-down-selfie.jpeg",
   },
   {
     id: "8",
-    caption: "The photo booth strip from that one summer — we still have it somewhere.",
+    caption: "Peace signs and a chocolate donut we definitely didn't need but got anyway.",
+    image: "/memories/donut-date.jpeg",
   },
   {
     id: "9",
-    caption: "Every single time you called just to say hi for no reason at all.",
-  },
-  {
-    id: "10",
-    caption: "The trip we planned on a whim and somehow made work perfectly.",
-  },
-  {
-    id: "11",
-    caption: "You, me, and way too much karaoke on a random Tuesday night.",
-  },
-  {
-    id: "12",
-    caption: "Happy birthday. Here's to a hundred more memories to fill this jar with.",
+    caption: "Twirling in your new kurta just to show me before we left the house.",
+    image: "/memories/new-kurta-twirl.jpeg",
   },
 ];

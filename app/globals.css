@@ -42,6 +42,14 @@ body {
   50% { opacity: 1; transform: scale(1.15); }
 }
 
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-6deg); }
+  40% { transform: rotate(5deg); }
+  60% { transform: rotate(-4deg); }
+  80% { transform: rotate(3deg); }
+}
+
 @keyframes jar-glow {
   0%, 100% { filter: drop-shadow(0 0 18px rgba(255, 217, 142, 0.55)); }
   50% { filter: drop-shadow(0 0 32px rgba(255, 217, 142, 0.85)); }
