@@ -20,21 +20,24 @@ npm run dev
 
 Then open http://localhost:3000.
 
-## Deploy to Vercel
+## Deploy to GitHub Pages
 
-The project is a stock Next.js app, so it deploys to Vercel with zero
-config:
+Already wired up: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+builds the site as a static export and publishes it to GitHub Pages on every
+push to `main`. Enable it once under the repo's Settings → Pages → Source →
+"GitHub Actions", then it's live at:
 
-```bash
-npx vercel
+```
+https://<your-username>.github.io/kavya-memory-jar/
 ```
 
-or connect the GitHub repo at vercel.com/new and it'll auto-detect Next.js.
+Note: GitHub Pages sites are publicly reachable at that URL even if the repo
+itself is private — there's no built-in access control on the free tier.
 
 ## Deploy to GCP (Cloud Run) later
 
-A `Dockerfile` is already set up for this (Next.js "standalone" output).
-Once you're ready to move it to GCP:
+A `Dockerfile` is already set up for this (builds the static export and
+serves it with nginx). Once you're ready to move it to GCP:
 
 ```bash
 gcloud builds submit --tag gcr.io/PROJECT_ID/kavya-memory-jar

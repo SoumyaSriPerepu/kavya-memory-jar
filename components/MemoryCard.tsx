@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { basePath } from "@/lib/basePath";
 import type { Memory } from "@/lib/memories";
 
 type MemoryCardProps = {
@@ -27,7 +28,7 @@ export default function MemoryCard({ memory, onClose }: MemoryCardProps) {
         {memory.image && (
           <div className="mb-4 overflow-hidden rounded-2xl bg-background">
             <Image
-              src={memory.image}
+              src={`${basePath}${memory.image}`}
               alt={memory.caption}
               width={800}
               height={800}

@@ -9,13 +9,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:20-slim AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
+FROM nginx:alpine AS runner
+COPY --from=builder /app/out /usr/share/nginx/html
 EXPOSE 8080
-ENV PORT=8080
-CMD ["node", "server.js"]
+RUN sed -i 's/listen\s*80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+CMD ["nginx", "-g", "daemon off;"]
