@@ -8,6 +8,10 @@
   --accent-soft: #f3c98b;
   --card: #fffaf3;
   --glow: #ffd98e;
+  --pink: #f4a9c0;
+  --blue: #9bcbe6;
+  --mint: #a3ddb8;
+  --lavender: #c6a9e6;
 }
 
 @theme inline {
@@ -17,12 +21,21 @@
   --color-accent-soft: var(--accent-soft);
   --color-card: var(--card);
   --color-glow: var(--glow);
+  --color-pink: var(--pink);
+  --color-blue: var(--blue);
+  --color-mint: var(--mint);
+  --color-lavender: var(--lavender);
   --font-hand: var(--font-caveat);
   --font-sans: var(--font-quicksand);
 }
 
 body {
-  background: radial-gradient(circle at 50% 0%, var(--background-2), var(--background) 60%);
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--pink) 45%, transparent), transparent 42%),
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--blue) 45%, transparent), transparent 42%),
+    radial-gradient(circle at 18% 85%, color-mix(in srgb, var(--mint) 40%, transparent), transparent 42%),
+    radial-gradient(circle at 85% 88%, color-mix(in srgb, var(--lavender) 40%, transparent), transparent 42%),
+    radial-gradient(circle at 50% 0%, var(--background-2), var(--background) 60%);
   color: var(--foreground);
   font-family: var(--font-quicksand), sans-serif;
   min-height: 100vh;
@@ -40,6 +53,17 @@ body {
 @keyframes twinkle {
   0%, 100% { opacity: 0.3; transform: scale(0.85); }
   50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes bokeh-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18px, -14px) scale(1.08); }
+  66% { transform: translate(-14px, 10px) scale(0.95); }
+}
+
+@keyframes petal-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
 }
 
 @keyframes jar-bob {
@@ -111,4 +135,12 @@ body {
 
 .animate-note-fly {
   animation: note-fly 0.7s ease-out forwards;
+}
+
+.animate-bokeh-drift {
+  animation: bokeh-drift 13s ease-in-out infinite;
+}
+
+.animate-petal-sway {
+  animation: petal-sway 5s ease-in-out infinite;
 }

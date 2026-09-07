@@ -14,7 +14,7 @@ export default function MemoryCard({ memory, onClose }: MemoryCardProps) {
       onClick={onClose}
     >
       <div
-        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl bg-card p-6 shadow-2xl animate-pop-in"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl bg-card p-6 shadow-[0_0_0_1px_rgba(224,138,91,0.15),0_20px_60px_-15px_rgba(198,169,230,0.5)] animate-pop-in"
         onClick={(e) => e.stopPropagation()}
       >
         <button

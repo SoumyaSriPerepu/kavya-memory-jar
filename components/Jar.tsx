@@ -36,6 +36,34 @@ function buildNotes(total: number) {
 const BODY_PATH =
   "M44 108 C34 108 32 128 33 150 C34 178 28 190 29 220 C30 252 26 270 42 288 C56 304 78 310 110 310 C142 310 164 304 178 288 C194 270 190 252 191 220 C192 190 186 178 187 150 C188 128 186 108 176 108 Z";
 
+const FAIRY_LIGHTS = [
+  { x: 55, y: 130, color: "#ffd98e", delay: "0s" },
+  { x: 80, y: 145, color: "#f4a9c0", delay: "0.3s" },
+  { x: 105, y: 125, color: "#ffd98e", delay: "0.6s" },
+  { x: 130, y: 150, color: "#9bcbe6", delay: "0.9s" },
+  { x: 155, y: 135, color: "#ffd98e", delay: "1.2s" },
+  { x: 150, y: 200, color: "#c6a9e6", delay: "0.4s" },
+  { x: 120, y: 220, color: "#ffd98e", delay: "0.8s" },
+  { x: 90, y: 210, color: "#a3ddb8", delay: "1.1s" },
+  { x: 60, y: 230, color: "#ffd98e", delay: "1.5s" },
+  { x: 75, y: 270, color: "#f4a9c0", delay: "0.2s" },
+  { x: 110, y: 285, color: "#ffd98e", delay: "0.7s" },
+  { x: 145, y: 270, color: "#9bcbe6", delay: "1.3s" },
+];
+const FAIRY_WIRE = FAIRY_LIGHTS.map((p) => `${p.x} ${p.y}`).join(" L ");
+
+function Petal({ color }: { color: string }) {
+  return (
+    <g>
+      <ellipse cx="6" cy="0" rx="6" ry="3.2" fill={color} opacity="0.9" />
+      <ellipse cx="-6" cy="0" rx="6" ry="3.2" fill={color} opacity="0.9" />
+      <ellipse cx="0" cy="6" rx="3.2" ry="6" fill={color} opacity="0.9" />
+      <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill={color} opacity="0.9" />
+      <circle r="2.5" fill="#fff2c2" />
+    </g>
+  );
+}
+
 export default function Jar({ total, remaining, shaking, popping }: JarProps) {
   const notes = buildNotes(total).slice(0, remaining);
 
@@ -67,9 +95,24 @@ export default function Jar({ total, remaining, shaking, popping }: JarProps) {
             </linearGradient>
           </defs>
 
-          {/* glass body fill + notes */}
+          {/* glass body fill + fairy lights + notes */}
           <path d={BODY_PATH} fill="url(#glassFill)" />
           <g clipPath="url(#jarBody)">
+            <path d={`M ${FAIRY_WIRE}`} fill="none" stroke="#d9c2a3" strokeWidth="1" opacity="0.5" />
+            {FAIRY_LIGHTS.map((light, i) => (
+              <circle
+                key={i}
+                cx={light.x}
+                cy={light.y}
+                r="4"
+                fill={light.color}
+                className="animate-twinkle"
+                style={{
+                  animationDelay: light.delay,
+                  filter: `drop-shadow(0 0 4px ${light.color})`,
+                }}
+              />
+            ))}
             {notes.map((note, i) => (
               <g key={i} transform={`translate(${note.x} ${note.y}) rotate(${note.rotation})`}>
                 <g
@@ -109,6 +152,14 @@ export default function Jar({ total, remaining, shaking, popping }: JarProps) {
             <circle r="4" fill="#a97c50" />
             <path d="M0 0 Q14 -10 20 2 Q14 6 0 0" fill="none" stroke="#a97c50" strokeWidth="2.5" strokeLinecap="round" />
             <path d="M0 0 Q14 12 22 6 Q14 -2 0 0" fill="none" stroke="#a97c50" strokeWidth="2.5" strokeLinecap="round" />
+          </g>
+
+          {/* dried-flower accents */}
+          <g transform="translate(68 66) scale(0.8)" className="animate-petal-sway" style={{ transformOrigin: "68px 66px" }}>
+            <Petal color="#f4a9c0" />
+          </g>
+          <g transform="translate(168 84) scale(0.65)" className="animate-petal-sway" style={{ transformOrigin: "168px 84px", animationDelay: "1.2s" }}>
+            <Petal color="#a3ddb8" />
           </g>
 
           {/* cork stopper */}

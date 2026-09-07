@@ -60,7 +60,7 @@ export default function MemoryJar() {
 
       <button
         onClick={pullMemory}
-        className="rounded-full bg-accent px-8 py-3 font-sans text-base font-semibold text-white shadow-md transition hover:bg-accent/90 active:scale-95"
+        className="rounded-full bg-gradient-to-r from-pink via-accent to-lavender bg-[length:200%_100%] px-8 py-3 font-sans text-base font-semibold text-white shadow-[0_4px_20px_rgba(224,138,91,0.4)] transition duration-500 hover:bg-[length:100%_100%] hover:shadow-[0_6px_24px_rgba(224,138,91,0.55)] active:scale-95"
       >
         Pull a memory
       </button>
