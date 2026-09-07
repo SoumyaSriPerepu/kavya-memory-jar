@@ -58,7 +58,7 @@ export const memories: Memory[] = [
   },
   {
     id: "10",
-    caption: "Tiny you, flower garlands and all — already stealing the show.",
+    caption: "Confused, chaotic, no idea what's going on — but still somehow looking confident about it.",
     image: "/memories/baby-flower-garland.jpg",
   },
   {
