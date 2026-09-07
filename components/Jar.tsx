@@ -64,6 +64,28 @@ function Petal({ color }: { color: string }) {
   );
 }
 
+function sparklePath(size: number) {
+  const a = size;
+  const b = size * 0.18;
+  return `M0,${-a} C${b},${-b} ${b},${-b} ${a},0 C${b},${b} ${b},${b} 0,${a} C${-b},${b} ${-b},${b} ${-a},0 C${-b},${-b} ${-b},${-b} 0,${-a} Z`;
+}
+
+const SPARKLES = [
+  { x: 92, y: 10, size: 4.5, color: "#f4a9c0", delay: "0s" },
+  { x: 112, y: 6, size: 5.5, color: "#ffd98e", delay: "0.9s" },
+  { x: 128, y: 9, size: 4, color: "#9bcbe6", delay: "1.7s" },
+];
+
+function Sparkle({ x, y, size, color, delay }: { x: number; y: number; size: number; color: string; delay: string }) {
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <g className="animate-sparkle-rise" style={{ animationDelay: delay }}>
+        <path d={sparklePath(size)} fill={color} style={{ filter: `drop-shadow(0 0 3px ${color})` }} />
+      </g>
+    </g>
+  );
+}
+
 export default function Jar({ total, remaining, shaking, popping }: JarProps) {
   const notes = buildNotes(total).slice(0, remaining);
 
@@ -93,10 +115,17 @@ export default function Jar({ total, remaining, shaking, popping }: JarProps) {
               <stop offset="0%" stopColor="#e0ab74" />
               <stop offset="100%" stopColor="#c98d54" />
             </linearGradient>
+            <linearGradient id="glassMagic" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#f4a9c0" stopOpacity="0.16" />
+              <stop offset="35%" stopColor="#ffd98e" stopOpacity="0.1" />
+              <stop offset="65%" stopColor="#a3ddb8" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#9bcbe6" stopOpacity="0.16" />
+            </linearGradient>
           </defs>
 
           {/* glass body fill + fairy lights + notes */}
           <path d={BODY_PATH} fill="url(#glassFill)" />
+          <path d={BODY_PATH} fill="url(#glassMagic)" />
           <g clipPath="url(#jarBody)">
             <path d={`M ${FAIRY_WIRE}`} fill="none" stroke="#d9c2a3" strokeWidth="1" opacity="0.5" />
             {FAIRY_LIGHTS.map((light, i) => (
@@ -177,6 +206,20 @@ export default function Jar({ total, remaining, shaking, popping }: JarProps) {
           {/* glass shine streaks */}
           <path d="M54 130 L48 270" stroke="#fffaf3" strokeWidth="7" strokeLinecap="round" opacity="0.28" />
           <path d="M172 140 L168 240" stroke="#fffaf3" strokeWidth="4" strokeLinecap="round" opacity="0.18" />
+
+          {/* star gem embedded in the cork top */}
+          <g transform="translate(110 19)" className="animate-twinkle">
+            <path
+              d={sparklePath(6)}
+              fill="#fff2c2"
+              style={{ filter: "drop-shadow(0 0 4px #ffd98e)" }}
+            />
+          </g>
+
+          {/* sparkle dust drifting up from the jar */}
+          {SPARKLES.map((s, i) => (
+            <Sparkle key={i} {...s} />
+          ))}
         </svg>
 
         <div className="absolute left-1/2 top-[112px] -translate-x-1/2 rotate-[-4deg] rounded-sm border border-dashed border-accent/40 bg-card px-3 py-1 text-center shadow-sm">
