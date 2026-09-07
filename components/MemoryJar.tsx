@@ -9,6 +9,7 @@ export default function MemoryJar() {
   const [openedIds, setOpenedIds] = useState<string[]>([]);
   const [active, setActive] = useState<Memory | null>(null);
   const [shaking, setShaking] = useState(false);
+  const [popping, setPopping] = useState(false);
 
   const remaining = useMemo(
     () => memories.filter((m) => !openedIds.includes(m.id)),
@@ -18,20 +19,22 @@ export default function MemoryJar() {
   const allOpened = remaining.length === 0;
 
   function pullMemory() {
-    if (active) return;
+    if (active || popping) return;
 
     const pool = remaining.length > 0 ? remaining : memories;
     const pick = pool[Math.floor(Math.random() * pool.length)];
 
     setShaking(true);
+    setPopping(true);
     window.setTimeout(() => setShaking(false), 400);
+    window.setTimeout(() => setPopping(false), 700);
 
     window.setTimeout(() => {
       setActive(pick);
       setOpenedIds((prev) =>
         prev.includes(pick.id) ? prev : [...prev, pick.id]
       );
-    }, 200);
+    }, 550);
   }
 
   return (
@@ -39,12 +42,13 @@ export default function MemoryJar() {
       <button
         onClick={pullMemory}
         aria-label="Pull a memory from the jar"
-        className="cursor-pointer border-none bg-transparent p-0"
+        className="cursor-pointer border-none bg-transparent p-0 transition-transform duration-300 hover:scale-105 active:scale-95"
       >
         <Jar
           total={memories.length}
           remaining={allOpened ? memories.length : remaining.length}
           shaking={shaking}
+          popping={popping}
         />
       </button>
 
