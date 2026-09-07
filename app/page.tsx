@@ -1,14 +1,12 @@
 import Bokeh from "@/components/Bokeh";
 import Fireflies from "@/components/Fireflies";
 import MemoryJar from "@/components/MemoryJar";
-import ScatteredMemories from "@/components/ScatteredMemories";
 
 export default function Home() {
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6 py-16">
       <Bokeh />
       <Fireflies />
-      <ScatteredMemories />
 
       <div className="relative z-10 flex flex-col items-center gap-2 text-center">
         <h1 className="font-hand text-5xl text-foreground sm:text-6xl">
