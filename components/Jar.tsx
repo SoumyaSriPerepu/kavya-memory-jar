@@ -224,7 +224,7 @@ export default function Jar({ total, remaining, shaking, popping }: JarProps) {
 
         <div className="absolute left-1/2 top-[112px] -translate-x-1/2 rotate-[-4deg] rounded-sm border border-dashed border-accent/40 bg-card px-3 py-1 text-center shadow-sm">
           <p className="font-hand text-base leading-none text-foreground whitespace-nowrap">
-            ♡ Kavya&apos;s Memories ♡
+            ♡ Memories Together ♡
           </p>
         </div>
       </div>
