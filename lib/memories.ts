@@ -28,12 +28,12 @@ export const memories: Memory[] = [
   },
   {
     id: "4",
-    caption: "Cap, gown, peace signs. So proud of you that day I could've burst.",
+    caption: "My biggest support, always showing harsh truth.",
     image: "/memories/graduation-day.jpeg",
   },
   {
     id: "5",
-    caption: "All of us wandering around the Oculus, pretending we knew where we were going — little sis, big sis, and mamma at the World Trade Center, about to become New Yorkers.",
+    caption: "Little sis, big sis, and mamma at the World Trade Center, about to become New Yorkers.",
     image: "/memories/oculus-with-mom.jpeg",
   },
   {
@@ -48,12 +48,27 @@ export const memories: Memory[] = [
   },
   {
     id: "8",
-    caption: "Peace signs and a chocolate donut we definitely didn't need but got anyway — looking cute anyway.",
+    caption: "Looking cute anyway.",
     image: "/memories/donut-date.jpeg",
   },
   {
     id: "9",
     caption: "Twirling in your new kurta just to show me before we left the house.",
     image: "/memories/new-kurta-twirl.jpeg",
+  },
+  {
+    id: "10",
+    caption: "Tiny you, flower garlands and all — already stealing the show.",
+    image: "/memories/baby-flower-garland.jpg",
+  },
+  {
+    id: "11",
+    caption: "Matching dresses, matching giggles — trouble in stereo.",
+    image: "/memories/matching-dresses-sisters.jpg",
+  },
+  {
+    id: "12",
+    caption: "You, a mirror, and main character energy since day one.",
+    image: "/memories/mirror-moment.jpg",
   },
 ];
