@@ -13,17 +13,17 @@ export type Memory = {
 export const memories: Memory[] = [
   {
     id: "1",
-    caption: "Standing under the Lincoln Park sign, arms around each other, way before either of us knew what we'd grow up to be.",
+    caption: "Standing under the Lincoln Park sign, arms around each other, way before either of us knew what we'd grow up to be — nobody ever stood a chance, me and you, forever.",
     image: "/memories/lincoln-park-sign.jpeg",
   },
   {
     id: "2",
-    caption: "Dressed up, dramatic, and completely inseparable — you and your kissy face, me just happy to be next to you.",
+    caption: "Dressed up, dramatic, and completely inseparable — you and your kissy face, me just happy to be next to you. You ran straight to me and kissed me that day — I hope you remember.",
     image: "/memories/festive-selfie.jpeg",
   },
   {
     id: "3",
-    caption: "Tongues out, masks half on, cranes in the background — the kind of silly you only are with a sister.",
+    caption: "Our first sisters' time alone.",
     image: "/memories/silly-faces-outdoors.jpeg",
   },
   {
@@ -33,22 +33,22 @@ export const memories: Memory[] = [
   },
   {
     id: "5",
-    caption: "All of us wandering around the Oculus, pretending we knew where we were going.",
+    caption: "All of us wandering around the Oculus, pretending we knew where we were going — little sis, big sis, and mamma at the World Trade Center, about to become New Yorkers.",
     image: "/memories/oculus-with-mom.jpeg",
   },
   {
     id: "6",
-    caption: "Little sisters on a boat with the skyline behind us, and grown-up us in almost the same pose years later.",
+    caption: "Little sisters on a boat with the skyline behind us, and grown-up us in almost the same pose years later — our own 8 year challenge.",
     image: "/memories/boat-trip-then-and-now.jpeg",
   },
   {
     id: "7",
-    caption: "Upside-down selfies on the floor for absolutely no reason — pure chaos, pure us.",
+    caption: "Upside-down selfies on the floor for absolutely no reason — pure chaos, pure us. You became my safe space, and reminded me you're always there.",
     image: "/memories/upside-down-selfie.jpeg",
   },
   {
     id: "8",
-    caption: "Peace signs and a chocolate donut we definitely didn't need but got anyway.",
+    caption: "Peace signs and a chocolate donut we definitely didn't need but got anyway — looking cute anyway.",
     image: "/memories/donut-date.jpeg",
   },
   {
